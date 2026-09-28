@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Islamic Inheritance — Fara'id</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: 30px auto;
+    }
+
+    /* HEADER */
+
+    .header {
+      background: #123c2a;
+      color: white;
+      padding: 30px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    .header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .header p {
+      margin: 6px 0;
+      opacity: 0.95;
+    }
+
+    .header-subtitle {
+      font-size: 16px;
+    }
+
+    .developer-profile {
+      margin: 20px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.25);
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .developer-profile .name {
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .developer-profile .company {
+      font-weight: 600;
+    }
+
+    .developer-profile .role {
+      font-size: 14px;
+    }
+
+    .developer-profile .mentor {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    /* NOTICE */
+
+    .notice {
+      background: #fff8e1;
+      border-left: 5px solid #d69e2e;
+      padding: 15px 18px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+
+    /* CARDS */
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #123c2a;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 12px;
+    }
+
+    /* FORM */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input,
+    select {
+      padding: 11px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: white;
+      width: 100%;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #123c2a;
+      box-shadow: 0 0 0 2px rgba(18,60,42,0.1);
+    }
+
+    /* HEIRS */
+
+    .heir-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: end;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 11px 17px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: #123c2a;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #1f2937;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    /* STATUS */
+
+    .status {
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .status.success {
+      display: block;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status.error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status.info {
+      display: block;
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    /* RESULTS */
+
+    .results-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .summary-label {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    th,
+    td {
+      padding: 11px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-size: 14px;
+    }
+
+    .eligible {
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .warning {
+      color: #92400e;
+      font-weight: 600;
+    }
+
+    .explanation {
+      background: #f8fafc;
+      border-left: 4px solid #94a3b8;
+      padding: 12px;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .disclaimer {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+
+      .container {
+        width: 94%;
+        margin: 15px auto;
+      }
+
+      .header {
+        padding: 24px 18px;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .heir-row {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+      }
+
+      .results-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="header">
+
+    <h1>Islamic Inheritance — Fara'id</h1>
+
+    <p class="header-subtitle">
+      Basic Inheritance Calculation &amp; Distribution System
+    </p>
+
+    <p class="header-subtitle">
+      Educational / Administrative Tool
+    </p>
+
+    <div class="developer-profile">
+
+      <p class="name">
+        Maimuna Muhammad Kudi
+      </p>
+
+      <p class="company">
+        CyberOptics and IT Services LTD
+      </p>
+
+      <p class="role">
+        Front-end Developer • Back-end Developer • Senior Code Designer
+      </p>
+
+      <p class="mentor">
+        Mentor:
+        <strong>Abu Afeef Muhammad Nura Muhammad</strong>
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       IMPORTANT NOTICE
+       ===================================================== -->
+
+  <div class="notice">
+
+    <strong>Important:</strong>
+
+    This application provides a limited basic calculation
+    based on the rules currently implemented in the backend.
+
+    <br><br>
+
+    It is not a substitute for a qualified Islamic scholar,
+    legal professional, or competent inheritance authority.
+
+    <br><br>
+
+    Complex cases must be reviewed before any actual
+    distribution of an estate.
+
+  </div>
+
+
+  <!-- =====================================================
+       STATUS
+       ===================================================== -->
+
+  <div
+    id="statusMessage"
+    class="status">
+  </div>
+
+
+  <!-- =====================================================
+       CASE INFORMATION
+       ===================================================== -->
+
+  <section class="card">
+
+    <h2>1. Case Information</h2>
+
+    <div class="grid">
+
+      <div class="field">
+
+        <label for="caseId">
+          Case ID
+        </label>
+
+        <input
+          type="text"
+          id="caseId"
+          placeholder="Example: CASE-001"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="deceasedName">
+          Deceased Name
+        </label>
+
+        <input
+          type="text"
+          id="deceasedName"
+          placeholder="Enter deceased name"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="dateOfDeath">
+          Date of Death
+        </label>
+
+        <input
+          type="date"
+          id="dateOfDeath"
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       ESTATE
+       ===================================================== -->
+
+  <section class="card">
+
+    <h2>2. Estate Information</h2>
+
+    <div class="grid">
+
+      <div class="field">
+
+        <label for="grossEstate">
+          Gross Estate
+        </label>
+
+        <input
+          type="number"
+          id="grossEstate"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="liabilities">
+          Liabilities / Debts
+        </label>
+
+        <input
+          type="number"
+          id="liabilities"
+          min="0"
+          step="0.01"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="funeralExpenses">
+          Funeral Expenses
+        </label>
+
+        <input
+          type="number"
+          id="funeralExpenses"
+          min="0"
+          step="0.01"
+          value="0"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="validBequests">
+          Valid Bequests
+        </label>
+
+        <input
+          type="number"
+          id="validBequests"
+          min="0"
+          step="0.01"
+          value="0"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="explanation">
+
+      <strong>Estate calculation:</strong>
+
+      Gross Estate − Liabilities − Funeral Expenses −
+      Valid Bequests = Net Estate.
+
+      <br><br>
+
+      <strong>Note:</strong>
+
+      The current backend accepts the bequest amount as an
+      input deduction. It does not independently determine
+      whether a bequest is valid under all Islamic rules.
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       HEIRS
+       ===================================================== -->
+
+  <section class="card">
+
+    <h2>3. Surviving Heirs</h2>
+
+    <p>
+      Add the surviving heirs of the deceased.
+      The current basic calculator supports:
+      Husband, Wife, Son, Daughter, Father and Mother.
+    </p>
+
+    <div id="heirsContainer"></div>
+
+    <div class="actions">
+
+      <button
+        type="button"
+        class="btn-secondary"
+        onclick="addHeirRow()"
+      >
+        + Add Heir
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CALCULATE
+       ===================================================== -->
+
+  <section class="card">
+
+    <h2>4. Calculate Distribution</h2>
+
+    <p>
+      Review all information before calculating.
+    </p>
+
+    <div class="actions">
+
+      <button
+        type="button"
+        class="btn-primary"
+        id="calculateButton"
+        onclick="calculateInheritance()"
+      >
+        Calculate Inheritance
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        onclick="clearForm()"
+      >
+        Clear Form
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       RESULTS
+       ===================================================== -->
+
+  <section
+    class="card hidden"
+    id="resultsSection"
+  >
+
+    <h2>5. Distribution Result</h2>
+
+
+    <div class="results-summary">
+
+      <div class="summary-box">
+
+        <div class="summary-label">
+          Net Estate
+        </div>
+
+        <div
+          class="summary-value"
+          id="resultNetEstate"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div class="summary-label">
+          Remaining
+        </div>
+
+        <div
+          class="summary-value"
+          id="resultRemaining"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <div class="summary-label">
+          Status
+        </div>
+
+        <div
+          class="summary-value"
+          id="resultStatus"
+        >
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- DISTRIBUTION TABLE -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Heir</th>
+            <th>Count</th>
+            <th>Fixed Share</th>
+            <th>Residual Share</th>
+            <th>Total Share</th>
+            <th>Total Amount</th>
+            <th>Per Person</th>
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="distributionBody"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <h3>
+      Calculation Explanations
+    </h3>
+
+    <div id="explanationsContainer"></div>
+
+
+    <div class="disclaimer">
+
+      <strong>Scholar Review Required</strong>
+
+      <br><br>
+
+      This calculation is generated by the current
+      software rules and should not be treated as a final
+      Islamic inheritance ruling.
+
+      <br><br>
+
+      Complex cases involving issues such as
+      <em>
+        Hajb, 'Awl, Radd, grandparents, siblings,
+        multiple heir combinations, or disputed
+        jurisprudential opinions
+      </em>
+      require further implementation and qualified scholarly review.
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GLOBAL SETTINGS
+   ========================================================= */
+
+const currencyFormatter =
+  new Intl.NumberFormat(
+    'en-NG',
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }
+  );
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    addHeirRow();
+
+  }
+);
+
+
+/* =========================================================
+   ADD HEIR
+   ========================================================= */
+
+function addHeirRow() {
+
+  const container =
+    document.getElementById(
+      'heirsContainer'
+    );
+
+
+  const row =
+    document.createElement(
+      'div'
+    );
+
+
+  row.className =
+    'heir-row';
+
+
+  row.innerHTML = `
+
+    <div class="field">
+
+      <label>
+        Relationship
+      </label>
+
+      <select class="relationship">
+
+        <option value="">
+          Select relationship
+        </option>
+
+        <option value="Husband">
+          Husband
+        </option>
+
+        <option value="Wife">
+          Wife
+        </option>
+
+        <option value="Son">
+          Son
+        </option>
+
+        <option value="Daughter">
+          Daughter
+        </option>
+
+        <option value="Father">
+          Father
+        </option>
+
+        <option value="Mother">
+          Mother
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Gender
+      </label>
+
+      <select class="gender">
+
+        <option value="">
+          Select
+        </option>
+
+        <option value="Male">
+          Male
+        </option>
+
+        <option value="Female">
+          Female
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        Count
+      </label>
+
+      <input
+        type="number"
+        class="count"
+        min="1"
+        value="1"
+      >
+
+    </div>
+
+
+    <button
+      type="button"
+      class="btn-danger"
+      onclick="removeHeirRow(this)"
+    >
+      Remove
+    </button>
+
+  `;
+
+
+  container.appendChild(
+    row
+  );
+}
+
+
+/* =========================================================
+   REMOVE HEIR
+   ========================================================= */
+
+function removeHeirRow(button) {
+
+  const row =
+    button.parentElement;
+
+  row.remove();
+
+
+  const container =
+    document.getElementById(
+      'heirsContainer'
+    );
+
+
+  if (
+    container.children.length === 0
+  ) {
+
+    addHeirRow();
+
+  }
+}
+
+
+/* =========================================================
+   COLLECT HEIRS
+   ========================================================= */
+
+function collectHeirs() {
+
+  const rows =
+    document.querySelectorAll(
+      '.heir-row'
+    );
+
+
+  const heirs = [];
+
+
+  rows.forEach(
+    row => {
+
+      const relationship =
+        row.querySelector(
+          '.relationship'
+        ).value;
+
+
+      const gender =
+        row.querySelector(
+          '.gender'
+        ).value;
+
+
+      const count =
+        Number(
+          row.querySelector(
+            '.count'
+          ).value
+        );
+
+
+      if (relationship) {
+
+        heirs.push({
+
+          relationship:
+            relationship,
+
+          gender:
+            gender,
+
+          count:
+            count > 0
+              ? count
+              : 1
+
+        });
+
+      }
+
+    }
+  );
+
+
+  return heirs;
+}
+
+
+/* =========================================================
+   CALCULATE INHERITANCE
+   ========================================================= */
+
+function calculateInheritance() {
+
+  clearStatus();
+
+
+  const caseId =
+    document
+      .getElementById('caseId')
+      .value
+      .trim();
+
+
+  const deceasedName =
+    document
+      .getElementById('deceasedName')
+      .value
+      .trim();
+
+
+  const dateOfDeath =
+    document
+      .getElementById('dateOfDeath')
+      .value;
+
+
+  const grossEstate =
+    Number(
+      document
+        .getElementById('grossEstate')
+        .value
+    );
+
+
+  const liabilities =
+    Number(
+      document
+        .getElementById('liabilities')
+        .value
+    ) || 0;
+
+
+  const funeralExpenses =
+    Number(
+      document
+        .getElementById('funeralExpenses')
+        .value
+    ) || 0;
+
+
+  const validBequests =
+    Number(
+      document
+        .getElementById('validBequests')
+        .value
+    ) || 0;
+
+
+  const heirs =
+    collectHeirs();
+
+
+  if (!caseId) {
+
+    showStatus(
+      'Please enter a Case ID.',
+      'error'
+    );
+
+    return;
+  }
+
+
+  if (!deceasedName) {
+
+    showStatus(
+      'Please enter the deceased name.',
+      'error'
+    );
+
+    return;
+  }
+
+
+  if (!grossEstate || grossEstate <= 0) {
+
+    showStatus(
+      'Please enter a valid gross estate amount.',
+      'error'
+    );
+
+    return;
+  }
+
+
+  if (heirs.length === 0) {
+
+    showStatus(
+      'Please add at least one heir.',
+      'error'
+    );
+
+    return;
+  }
+
+
+  const payload = {
+
+    caseId:
+      caseId,
+
+    deceasedName:
+      deceasedName,
+
+    dateOfDeath:
+      dateOfDeath,
+
+    grossEstate:
+      grossEstate,
+
+    liabilities:
+      liabilities,
+
+    funeralExpenses:
+      funeralExpenses,
+
+    validBequests:
+      validBequests,
+
+    heirs:
+      heirs
+
+  };
+
+
+  const button =
+    document.getElementById(
+      'calculateButton'
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    'Calculating...';
+
+
+  showStatus(
+    'Calculating inheritance...',
+    'info'
+  );
+
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(result) {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          'Calculate Inheritance';
+
+
+        if (!result) {
+
+          showStatus(
+            'No result was returned by the server.',
+            'error'
+          );
+
+          return;
+        }
+
+
+        displayResults(
+          result
+        );
+
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          'Calculate Inheritance';
+
+
+        console.error(error);
+
+
+        showStatus(
+          'Server error: ' +
+          (
+            error.message ||
+            error
+          ),
+          'error'
+        );
+
+      }
+    )
+
+    .apiCalculate(
+      payload
+    );
+}
+
+
+/* =========================================================
+   DISPLAY RESULTS
+   ========================================================= */
+
+function displayResults(result) {
+
+  const section =
+    document.getElementById(
+      'resultsSection'
+    );
+
+
+  section.classList.remove(
+    'hidden'
+  );
+
+
+  if (result.success) {
+
+    showStatus(
+      result.message,
+      'success'
+    );
+
+  } else {
+
+    showStatus(
+      result.message,
+      'error'
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      'resultNetEstate'
+    )
+    .textContent =
+      formatMoney(
+        result.netEstate
+      );
+
+
+  document
+    .getElementById(
+      'resultRemaining'
+    )
+    .textContent =
+      formatMoney(
+        result.remaining
+      );
+
+
+  document
+    .getElementById(
+      'resultStatus'
+    )
+    .textContent =
+      result.success
+        ? 'Completed'
+        : 'Review Required';
+
+
+  const tbody =
+    document.getElementById(
+      'distributionBody'
+    );
+
+
+  tbody.innerHTML =
+    '';
+
+
+  if (
+    result.distribution &&
+    result.distribution.length
+  ) {
+
+    result.distribution.forEach(
+      item => {
+
+        const tr =
+          document.createElement(
+            'tr'
+          );
+
+
+        const statusClass =
+          item.status === 'Eligible'
+            ? 'eligible'
+            : 'warning';
+
+
+        tr.innerHTML = `
+
+          <td>
+            <strong>
+              ${escapeHtml(
+                item.relationship
+              )}
+            </strong>
+          </td>
+
+          <td>
+            ${item.count}
+          </td>
+
+          <td>
+            ${formatShare(
+              item.fixedShare
+            )}
+          </td>
+
+          <td>
+            ${formatShare(
+              item.residualShare
+            )}
+          </td>
+
+          <td>
+            ${formatShare(
+              item.totalShare
+            )}
+          </td>
+
+          <td>
+            ${formatMoney(
+              item.totalAmount
+            )}
+          </td>
+
+          <td>
+            ${formatMoney(
+              item.perPersonAmount
+            )}
+          </td>
+
+          <td class="${statusClass}">
+            ${escapeHtml(
+              item.status
+            )}
+          </td>
+
+        `;
+
+
+        tbody.appendChild(
+          tr
+        );
+
+      }
+    );
+
+  } else {
+
+    tbody.innerHTML = `
+
+      <tr>
+
+        <td colspan="8">
+          No distribution rows were returned.
+        </td>
+
+      </tr>
+
+    `;
+
+  }
+
+
+  const explanationContainer =
+    document.getElementById(
+      'explanationsContainer'
+    );
+
+
+  explanationContainer.innerHTML =
+    '';
+
+
+  if (
+    result.explanations &&
+    result.explanations.length
+  ) {
+
+    result.explanations.forEach(
+      explanation => {
+
+        const div =
+          document.createElement(
+            'div'
+          );
+
+
+        div.className =
+          'explanation';
+
+
+        div.textContent =
+          explanation;
+
+
+        explanationContainer.appendChild(
+          div
+        );
+
+      }
+    );
+
+  } else {
+
+    explanationContainer.innerHTML = `
+
+      <div class="explanation">
+        No additional calculation explanation was returned.
+      </div>
+
+    `;
+
+  }
+
+
+  section.scrollIntoView({
+    behavior: 'smooth'
+  });
+}
+
+
+/* =========================================================
+   FORMAT MONEY
+   ========================================================= */
+
+function formatMoney(amount) {
+
+  const number =
+    Number(amount) || 0;
+
+
+  return '₦' +
+    currencyFormatter.format(
+      number
+    );
+}
+
+
+/* =========================================================
+   FORMAT SHARE
+   ========================================================= */
+
+function formatShare(share) {
+
+  const number =
+    Number(share) || 0;
+
+
+  if (number === 0) {
+
+    return '—';
+
+  }
+
+
+  return number
+    .toFixed(4)
+    .replace(
+      /0+$/,
+      ''
+    )
+    .replace(
+      /\.$/,
+      ''
+    );
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+function showStatus(message, type) {
+
+  const element =
+    document.getElementById(
+      'statusMessage'
+    );
+
+
+  element.textContent =
+    message;
+
+
+  element.className =
+    'status ' +
+    type;
+}
+
+
+function clearStatus() {
+
+  const element =
+    document.getElementById(
+      'statusMessage'
+    );
+
+
+  element.textContent =
+    '';
+
+
+  element.className =
+    'status';
+}
+
+
+/* =========================================================
+   CLEAR FORM
+   ========================================================= */
+
+function clearForm() {
+
+  document
+    .getElementById('caseId')
+    .value =
+      '';
+
+
+  document
+    .getElementById('deceasedName')
+    .value =
+      '';
+
+
+  document
+    .getElementById('dateOfDeath')
+    .value =
+      '';
+
+
+  document
+    .getElementById('grossEstate')
+    .value =
+      '';
+
+
+  document
+    .getElementById('liabilities')
+    .value =
+      '0';
+
+
+  document
+    .getElementById('funeralExpenses')
+    .value =
+      '0';
+
+
+  document
+    .getElementById('validBequests')
+    .value =
+      '0';
+
+
+  document
+    .getElementById('heirsContainer')
+    .innerHTML =
+      '';
+
+
+  addHeirRow();
+
+
+  document
+    .getElementById('resultsSection')
+    .classList.add(
+      'hidden'
+    );
+
+
+  clearStatus();
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+    .replace(
+      /</g,
+      '&lt;'
+    )
+    .replace(
+      />/g,
+      '&gt;'
+    )
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+}
+
+</script>
+
+</body>
+</html>
