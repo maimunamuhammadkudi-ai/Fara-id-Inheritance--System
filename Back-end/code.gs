@@ -929,11 +929,20 @@ function testDatabaseConnection() {
 function doGet() {
 
   return HtmlService
-    .createHtmlOutputFromFile('Index')
+    .createTemplateFromFile('Index')
+    .evaluate()
     .setTitle('Fara’id Basic Calculator')
     .setXFrameOptionsMode(
       HtmlService.XFrameOptionsMode.ALLOWALL
     );
+}
+
+
+function include(filename) {
+
+  return HtmlService
+    .createHtmlOutputFromFile(filename)
+    .getContent();
 }
 
 
